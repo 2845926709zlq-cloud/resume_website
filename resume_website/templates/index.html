@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.name }} - 个人简历</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="{{ url_for('static', filename='img/avatar.jpg') }}" class="avatar">
+        <div class="info">
+            <h1>{{ user.name }}</h1>
+            <p>性别：{{ user.gender }}｜年龄：{{ user.age }}</p>
+            <p>电话：{{ user.phone }}</p>
+            <p>邮箱：{{ user.email }}</p>
+            <p>籍贯：{{ user.address }}</p>
+            <p>政治面貌：{{ user.political }}</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>教育背景</h2>
+        <p><strong>{{ user.education.school }}</strong> | {{ user.education.major }} | {{ user.education.degree }}</p>
+        <p>时间：{{ user.education.time }}</p>
+        <p>主修课程：{{ user.education.courses }}</p>
+        <p>{{ user.education.desc }}</p>
+    </div>
+
+    <div class="section">
+        <h2>校园经历</h2>
+        {% for item in user.campus %}
+        <p><strong>{{ item.time }} {{ item.title }}</strong></p>
+        <p>{{ item.desc }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>实践经历</h2>
+        {% for item in user.practice %}
+        <p><strong>{{ item.time }} {{ item.title }}</strong></p>
+        <p>{{ item.desc }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>技能证书</h2>
+        <p>语言能力：{{ user.skills.language }}</p>
+        <p>办公技能：{{ user.skills.office }}</p>
+        <p>证书：{{ user.skills.cert }}</p>
+    </div>
+
+    <div class="section">
+        <h2>科研经历</h2>
+        {% for r in user.research %}
+        <p>• {{ r }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>自我评价</h2>
+        <p>{{ user.evaluation }}</p>
+    </div>
+</div>
+</body>
+</html>
